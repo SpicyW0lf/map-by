@@ -39,11 +39,16 @@ class TestConfig {
     @Bean
     fun taskImplSecond() = TaskImplSecond()
 
+//    @Bean
+//    @Order(Ordered.HIGHEST_PRECEDENCE)
+//    fun beanDefenitionRegistryForNaming(): BeanDefenitionRegistryForNaming {
+//        return BeanDefenitionRegistryForNaming()
+//    }
+
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    fun beanDefenitionRegistryForNaming(): BeanDefenitionRegistryForNaming {
-        return BeanDefenitionRegistryForNaming()
+    fun beanDefinitionFactoryForNaming(): BeanDefinitionFactoryForNaming {
+        return BeanDefinitionFactoryForNaming()
     }
-
 
 }

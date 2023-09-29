@@ -1,3 +1,6 @@
 package com.example.beannames
 
-annotation class MapBy(val name: String)
+
+@Target(AnnotationTarget.FUNCTION)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class MapBy(val name: String = "")

@@ -2,11 +2,15 @@ package com.example.beannames
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan
+import org.springframework.context.annotation.ComponentScan.Filter
+import org.springframework.context.annotation.FilterType
 import org.springframework.core.annotation.AnnotatedElementUtils
+import org.springframework.core.type.filter.AnnotationTypeFilter
 import org.springframework.test.context.ContextConfiguration
 
 @SpringBootTest
@@ -20,11 +24,9 @@ class BeanNamesApplicationTests {
     private lateinit var task2: TestConfig.TaskImplSecond
 
     @Autowired
+    @Qualifier("taskByTask")
     private lateinit var map: Map<String, TestConfig.Task>
 
-    @Test
-    fun contextLoads() {
-    }
 
     @Test
     fun beanDefinitionRegistry_registredCorrectBeans() {
