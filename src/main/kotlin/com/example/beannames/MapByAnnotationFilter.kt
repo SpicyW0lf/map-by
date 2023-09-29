@@ -7,9 +7,8 @@ import org.springframework.core.type.filter.AnnotationTypeFilter
 
 class MapByAnnotationFilter: AnnotationTypeFilter(MapBy::class.java) {
     override fun matchSelf(metadataReader: MetadataReader): Boolean {
-        if (metadataReader.classMetadata.isInterface) return false
-
         val metadata: AnnotationMetadata = metadataReader.annotationMetadata
+        println(metadata.hasAnnotatedMethods(annotationType.name))
         if (metadata.hasAnnotatedMethods(annotationType.name)) return true
 
         for (intName in metadataReader.classMetadata.interfaceNames) {
@@ -20,7 +19,7 @@ class MapByAnnotationFilter: AnnotationTypeFilter(MapBy::class.java) {
         return false
     }
 
-    private fun isInterfacesHaveAnnotation(clazz: Class<*> ): Boolean {
+    private fun isInterfacesHaveAnnotation(clazz: Class<*>): Boolean {
         for (method in clazz.methods) {
             if (method.isAnnotationPresent(annotationType)) {
                 return true
