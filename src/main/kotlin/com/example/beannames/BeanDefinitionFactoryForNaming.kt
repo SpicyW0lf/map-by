@@ -23,7 +23,7 @@ class BeanDefinitionFactoryForNaming : BeanFactoryPostProcessor {
             }
         }
 
-        mapOfInters.forEach {(key, value) ->
+        mapOfInters.forEach {(key, value) -> //не отформатировани код не хватает пробела
             val map = mutableMapOf<String, Any>()
             value.second.forEach {
                 val bean = beanFactory.getBean(it)
@@ -43,20 +43,23 @@ class BeanDefinitionFactoryForNaming : BeanFactoryPostProcessor {
                 if (interName != null){
                     break
                 }
+                //этот цикл выполняет функцию find
             }
-
+            
             if (interName != null) {
 
-                return interName
+                return interName//можно перенести внутрь for
             }
+            
         } else {
             for (method in clazz.methods) {
+            //этот цикл выполняет функцию find
                 if (method.isAnnotationPresent(MapBy::class.java)) {
                     var annName = method.getAnnotation(MapBy::class.java).name
                     if (annName == "") {
                         annName = method.name
                     }
-                    val key = clazz.name.substring(clazz.name.indexOf('$') + 1).replaceFirstChar { it.lowercase() } + "By" + annName.replaceFirstChar { it.uppercase() }
+                    val key = clazz.name.substring(clazz.name.indexOf('$') + 1).replaceFirstChar { it.lowercase() } + "By" + annName.replaceFirstChar { it.uppercase() }//можно вынести в отдельную функцию
                     if (mapOfInters.containsKey(key)) {
                         return key
                     }
@@ -66,6 +69,7 @@ class BeanDefinitionFactoryForNaming : BeanFactoryPostProcessor {
                 }
             }
 
+            //этот цикл выполняет функцию find
             for (inter in clazz.interfaces) {
                 interName = isInterfaceHasAnnotatedMethods(inter)
                 if (interName != null) return interName
